@@ -4,6 +4,7 @@
     <dimen name="rpi5_home_margin">24dp</dimen>
     <dimen name="rpi5_system_health_text_size">20sp</dimen>
     <dimen name="rpi5_button_text_size">22sp</dimen>
+    <dimen name="rpi5_button_side_margin">75dp</dimen>
     <dimen name="rpi5_button_min_width">240dp</dimen>
 
     <string name="rpi5_send_command" translatable="false">Send command</string>
