@@ -28,6 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <!-- RPI5_CAR: stock home screen containers disabled for a custom launcher UI.
     <com.android.car.ui.FocusArea
         android:id="@+id/top_card"
         android:layout_width="0dp"
@@ -61,4 +62,5 @@
         app:layout_constraintTop_toBottomOf="@+id/bottom_card"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
+    -->
 </androidx.constraintlayout.widget.ConstraintLayout>

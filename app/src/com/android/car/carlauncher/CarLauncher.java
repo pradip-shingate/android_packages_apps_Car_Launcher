@@ -143,6 +143,10 @@ public class CarLauncher extends FragmentActivity {
             setContentView(R.layout.car_launcher_multiwindow);
         } else {
             setContentView(R.layout.car_launcher);
+            // RPI5_CAR: the stock home screen UI (embedded maps TaskView, and the app grid that
+            // replaces it on passenger displays) is disabled to make room for a custom launcher
+            // UI. The maps_card container is commented out of car_launcher.xml as well.
+            /*
             // Passenger displays do not require TaskView Embedding
             if (!isPassengerDisplay) {
                 mUseSmallCanvasOptimizedMap =
@@ -172,11 +176,14 @@ public class CarLauncher extends FragmentActivity {
                         AppGridFragment.newInstance(ALL_APPS)).commit();
 
             }
+            */
         }
 
-        MediaIntentRouter.getInstance().registerMediaIntentHandler(mIntentHandler);
-        InCallIntentRouter.getInstance().registerInCallIntentHandler(mIntentHandler);
-        initializeCards();
+        // RPI5_CAR: the top (assistive) and bottom (media / in-call) home cards are disabled.
+        // The intent routers only serve those cards.
+        // MediaIntentRouter.getInstance().registerMediaIntentHandler(mIntentHandler);
+        // InCallIntentRouter.getInstance().registerInCallIntentHandler(mIntentHandler);
+        // initializeCards();
         setupContentObserversForTos();
     }
 
@@ -249,7 +256,8 @@ public class CarLauncher extends FragmentActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        initializeCards();
+        // RPI5_CAR: home cards are disabled, see onCreate().
+        // initializeCards();
     }
 
     private void initializeCards() {

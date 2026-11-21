@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    RPI5_CAR: these ids used to be declared by the home screen containers in
+    layout/car_launcher.xml and layout-land/car_launcher.xml, which are commented out for a
+    custom launcher UI. They are still referenced by overlayable.xml, CarLauncher.java and the
+    CarLauncher tests, so keep them declared here.
+-->
+<resources>
+    <item type="id" name="maps_card"/>
+    <item type="id" name="vertical_barrier"/>
+</resources>
