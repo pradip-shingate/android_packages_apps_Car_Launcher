@@ -28,6 +28,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <!-- RPI5_CAR: custom home screen. -->
+    <include
+        layout="@layout/rpi5_home_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <!-- RPI5_CAR: stock home screen containers disabled for a custom launcher UI.
     <com.android.car.ui.FocusArea
         android:id="@+id/top_card"

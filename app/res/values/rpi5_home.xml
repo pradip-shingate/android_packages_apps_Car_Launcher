@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- RPI5_CAR: resources for the custom home screen (layout/rpi5_home_dashboard.xml). -->
+<resources>
+    <dimen name="rpi5_home_margin">24dp</dimen>
+    <dimen name="rpi5_system_health_text_size">20sp</dimen>
+    <dimen name="rpi5_button_text_size">22sp</dimen>
+    <dimen name="rpi5_button_min_width">240dp</dimen>
+
+    <string name="rpi5_send_command" translatable="false">Send command</string>
+    <string name="rpi5_receive_data" translatable="false">Receive data</string>
+    <string name="rpi5_button_not_implemented" translatable="false">%1$s: not implemented yet</string>
+</resources>

@@ -39,6 +39,8 @@ import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.collection.ArraySet;
 import androidx.fragment.app.FragmentActivity;
@@ -83,6 +85,8 @@ public class CarLauncher extends FragmentActivity {
     private boolean mIsReadyLogged;
     private boolean mUseSmallCanvasOptimizedMap;
     private ViewGroup mMapsCard;
+    // RPI5_CAR: refreshes the system health panel on the custom home screen.
+    private SystemHealthMonitor mSystemHealthMonitor;
 
     @VisibleForTesting
     CarLauncherViewModel mCarLauncherViewModel;
@@ -185,6 +189,33 @@ public class CarLauncher extends FragmentActivity {
         // InCallIntentRouter.getInstance().registerInCallIntentHandler(mIntentHandler);
         // initializeCards();
         setupContentObserversForTos();
+        setupHomeDashboard();
+    }
+
+    /**
+     * RPI5_CAR: wires up the custom home screen (layout/rpi5_home_dashboard.xml). The views are
+     * absent in the multi-window layout, so everything here is null-checked.
+     */
+    private void setupHomeDashboard() {
+        TextView healthText = findViewById(R.id.system_health_text);
+        if (healthText != null) {
+            mSystemHealthMonitor = new SystemHealthMonitor(this, healthText);
+        }
+        setupPlaceholderButton(R.id.send_command_button, R.string.rpi5_send_command);
+        setupPlaceholderButton(R.id.receive_data_button, R.string.rpi5_receive_data);
+    }
+
+    private void setupPlaceholderButton(int buttonId, int labelResId) {
+        View button = findViewById(buttonId);
+        if (button == null) {
+            return;
+        }
+        button.setOnClickListener(v -> {
+            String label = getString(labelResId);
+            Log.i(TAG, "Home button clicked: " + label);
+            Toast.makeText(this, getString(R.string.rpi5_button_not_implemented, label),
+                    Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void setupRemoteCarTaskView(ViewGroup parent) {
@@ -214,6 +245,17 @@ public class CarLauncher extends FragmentActivity {
     protected void onResume() {
         super.onResume();
         maybeLogReady();
+        if (mSystemHealthMonitor != null) {
+            mSystemHealthMonitor.start();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mSystemHealthMonitor != null) {
+            mSystemHealthMonitor.stop();
+        }
     }
 
     @Override
